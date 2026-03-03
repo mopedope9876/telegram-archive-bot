@@ -13,6 +13,7 @@ from telegram.ext import (
 )
 
 TOKEN = os.getenv("BOT_TOKEN")
+print("TOKEN VALUE:", TOKEN)
 
 # Database setup
 conn = sqlite3.connect("archives.db")
