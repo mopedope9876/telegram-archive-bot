@@ -13,6 +13,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -22,6 +27,12 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run bot
-  env:
-    BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-  run: python main.py
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: python main.py
+
+      - name: Save database
+        run: |
+          git add archives.db
+          git commit -m "Update database" || echo "No changes"
+          git push
