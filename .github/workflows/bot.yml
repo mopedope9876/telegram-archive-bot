@@ -29,7 +29,13 @@ jobs:
       - name: Run bot
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-        run: python main.py
+        run: |
+         while true
+         do
+          python main.py
+          echo "Bot crashed. Restarting..."
+          sleep 5
+         done
 
       - name: Save database
         run: |
